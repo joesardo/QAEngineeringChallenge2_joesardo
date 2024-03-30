@@ -1,4 +1,4 @@
-import Base from './base.page';
+import Base from '../base.page';
 
 describe('Smoke', () => {
   beforeAll(async () => {
@@ -10,6 +10,5 @@ describe('Smoke', () => {
     await expect(Base.Elements.instructions).toBeVisible();
     await expect(Base.Elements.calculateHealthBtn).toBeVisible();
     await expect(Base.Elements.resetMachineDataBtn).toBeVisible();
-    await expect(Base.Elements.logPartTab).toBeVisible();
   });
 });

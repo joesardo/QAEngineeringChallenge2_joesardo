@@ -55,5 +55,5 @@ Use the following commands to run tests locally, once your build has successfull
 Or, you can specify running a test / suite individually by appending the file path onto the command:
 
   ```bash
-  detox test --configuration ios.sim.debug e2e/Smoke.test.js
+  detox test --configuration ios.sim.debug e2e/__tests__/Smoke.test.js
   ```
