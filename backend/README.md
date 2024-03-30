@@ -72,6 +72,12 @@ You can add and run tests to ensure the correctness of the API. Follow these ste
    yarn test
    ```
 
+4. To run an individual test, specify the file path after the yarn test command like so:
+
+  ```bash
+   yarn test weldingRobot.test.ts
+   ```
+
 ## Customization
 
 You can customize machine data and health evaluation logic by modifying the `machineData.json` file and the calculation functions in `app.ts`.
