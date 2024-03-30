@@ -16,6 +16,14 @@ export default class Elements {
 		return element(by.text('Reset Machine Data'));
 	}
 
+  get factoryHealthScore() {
+		return element(by.text('Factory Health Score'));
+	}
+
+  get machineHealthScores() {
+		return element(by.text('Machine Health Scores'));
+	}
+
   // Log Part Screen
   get logPart() {
 		return element(by.text('Log Part'));
@@ -33,6 +41,10 @@ export default class Elements {
 		return element(by.text('Select a machine'));
 	}
 
+  get weldingRobot() {
+		return element(by.text('Welding Robot'));
+	}
+
   get partValueField() {
 		return element(by.text('Part Value'));
 	}
@@ -43,5 +55,9 @@ export default class Elements {
 
   get saveBtn() {
 		return element(by.text('Save'));
+	}
+
+  get doneBtn() {
+		return element(by.text('Done'));
 	}
 }
