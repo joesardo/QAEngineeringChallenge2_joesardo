@@ -58,7 +58,7 @@ describe('Calculate Health', () => {
         }
       }
       machineHealthScore = await Base.Requests.postMachineHealthScore(options);
-    })
+    });
 
     it('should expect machine health scores to appear', async () => {
       await expect(Base.Elements.machineHealthScores).toBeVisible();
