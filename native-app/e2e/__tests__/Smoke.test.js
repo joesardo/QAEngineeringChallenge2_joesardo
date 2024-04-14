@@ -1,4 +1,4 @@
-import Base from '../base.page';
+import Base from '../classes/base.page';
 
 describe('Smoke', () => {
   beforeAll(async () => {

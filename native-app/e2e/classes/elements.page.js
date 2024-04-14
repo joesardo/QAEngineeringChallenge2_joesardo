@@ -50,7 +50,7 @@ export default class Elements {
 	}
 
   get partValueEntry() {
-		return element(by.text('Enter part value'));
+		return element(by.id('partValueInput'));
 	}
 
   get saveBtn() {

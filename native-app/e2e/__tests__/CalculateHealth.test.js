@@ -1,7 +1,9 @@
-import Base from '../base.page';
+import Base from '../classes/base.page';
 
 // NOTE: This test should only be run on iOS, since it uses the .setColumnToValue() method, which is only supported for iOS.
 // There is a workaround for Android, but I wanted to comply with the time restrictions and it would have taken longer to implement.
+
+let machineHealthScore;
 
 describe('Calculate Health', () => {
   beforeAll(async () => {
@@ -16,22 +18,21 @@ describe('Calculate Health', () => {
     it('should enter machine name', async () => {
       await expect(Base.Elements.machineNameField).toBeVisible();
       await Base.Elements.selectMachineEntry.atIndex(0).tap();
-      await element(by.type('UIPickerView')).setColumnToValue(0, 'Welding Robot');
+      await element(by.type('UIPickerView')).setColumnToValue(0, 'Assembly Line');
       await Base.Elements.doneBtn.tap();
     });
 
     it('should enter part name', async () => {
       await expect(Base.Elements.partNameField).toBeVisible();
       await Base.Elements.selectMachineEntry.atIndex(0).tap();
-      await element(by.type('UIPickerView')).setColumnToValue(0, 'Arc Stability');
+      await element(by.type('UIPickerView')).setColumnToValue(0, 'Speed');
       await Base.Elements.doneBtn.tap();
     });
 
     it('should enter part value', async () => {
       await expect(Base.Elements.partValueField).toBeVisible();
-      // Could not validate this part of the form due to the following error from the native code:
-      // First responder “(null)” does not conform to “UITextInput” protocol
-      // await Base.Elements.partValueEntry.typeText('0.25');
+      await Base.Elements.partValueEntry.tap();
+      await Base.Elements.partValueEntry.replaceText('0.1');
     });
 
     it('should save form', async () => {
@@ -48,16 +49,27 @@ describe('Calculate Health', () => {
       await Base.Elements.calculateHealthBtn.tap();
     });
 
+    it('should retrieve data from backend', async () => {
+      const options = { 
+        machines: {
+          assemblyLine: {
+            speed: 0.1,
+          }
+        }
+      }
+      machineHealthScore = await Base.Requests.postMachineHealthScore(options);
+    })
+
     it('should expect machine health scores to appear', async () => {
       await expect(Base.Elements.machineHealthScores).toBeVisible();
-      await expect(element(by.text('Welding Robot'))).toBeVisible();
+      await expect(element(by.text(`Assembly Line: ${machineHealthScore.machineScores.assemblyLine}`))).toBeVisible();
     });
 
     it('should reset form', async () => {
       await Base.Elements.resetMachineDataBtn.tap();
 
       await expect(Base.Elements.machineHealthScores).not.toBeVisible();
-      await expect(element(by.text('Welding Robot'))).not.toBeVisible();
+      await expect(element(by.text('Assembly Line'))).not.toBeVisible();
       await expect(Base.Elements.instructions).toBeVisible();
     });
   })

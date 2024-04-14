@@ -128,6 +128,7 @@ export default function EditScreenInfo({path}: {path: string}) {
         value={partValue}
         onChangeText={(text) => setPartValue(text)}
         placeholder='Enter part value'
+        testID='partValueInput'
       />
 
       <Button title='Save' onPress={savePart} />
